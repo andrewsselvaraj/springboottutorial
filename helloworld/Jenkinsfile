@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/andrewsselvaraj/hello-world.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Hello World app...'
+                // Example local run:
+                // sh 'nohup java -jar target/*.jar &'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build successful!'
+        }
+        failure {
+            echo '❌ Build failed!'
+        }
+    }
+}
