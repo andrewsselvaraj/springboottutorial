@@ -28,7 +28,8 @@ public class HelloWorldController {
         return "I return the value from helloAPI "; 
     }
     
-    @CrossOrigin(origins = "http://localhost:4200")
+   // @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     @RequestMapping("/tempature") 
     public String getTemparaure() { 
         
