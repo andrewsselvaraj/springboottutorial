@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: onlineexam-service
+  config:
+    import: "optional:consul:"   # <-- this line is required
+
+cloud:
+  consul:
+    host: 63.142.240.31           # your Consul host
+    port: 8500
+    config:
+      default-context: data
+      format: properties
+    discovery:
+      enabled: true
+      register: true
