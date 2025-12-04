@@ -1,0 +1,15 @@
+server:
+  port: 5999
+
+spring:
+  application:
+    name: order-microservice
+
+  cloud:
+    consul:
+      host: 63.142.240.31
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+        prefer-ip-address: true
