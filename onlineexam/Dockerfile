@@ -15,10 +15,22 @@ FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
+# Create non-root user
 RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
 
+# 👉 Copy Firebase service account key
+COPY serviceAccountKey.json /app/serviceAccountKey.json
+
+# 👉 Set Firebase credentials environment variable
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/serviceAccountKey.json
+
+# Copy application JAR
 COPY --from=build /app/target/*.jar app.jar
+
+# Fix permissions so spring user can read the JSON
+RUN chown spring:spring /app/serviceAccountKey.json
+
+USER spring:spring
 
 EXPOSE 8080
 
